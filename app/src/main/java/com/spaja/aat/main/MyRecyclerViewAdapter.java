@@ -9,12 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.spaja.aat.R;
 import com.spaja.aat.model.GifData;
-import com.spaja.aat.views.CustomTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,8 +74,8 @@ class MyRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, MyRecycler
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView (R.id.gif_title) CustomTextView gifTitle;
-        @BindView (R.id.position) CustomTextView position;
+        @BindView (R.id.gif_title) TextView gifTitle;
+        @BindView (R.id.position) TextView position;
         @BindView (R.id.gif_picture) ImageView gifPicture;
 
         MyViewHolder(android.view.View itemView) {

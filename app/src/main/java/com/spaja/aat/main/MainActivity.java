@@ -17,11 +17,11 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class MainActivity extends AppCompatActivity implements View {
+public class MainActivity extends AppCompatActivity implements MainActivityView {
 
     @BindView (R.id.recycler) public RecyclerView recyclerView;
     private Realm realm;
-    private Presenter presenter;
+    private MainActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View {
 
         setupRecyclerView();
 
-        presenter = new Presenter(this, new RepositoryImpl());
+        presenter = new MainActivityPresenter(this, new RepositoryImpl());
 
         EditText editText = (EditText) findViewById(R.id.search);
         editText.addTextChangedListener(new TextWatcher() {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                presenter.getGifs(s);
+                presenter.getGifs(s.toString());
             }
 
             @Override
@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity implements View {
     }
 
     @Override
-    public void loadRecyclerView(CharSequence s) {
-        if (s.length() != 0) {
-            RealmResults<GifData> gifData = realm.where(GifData.class).contains("title", s.toString()).findAll();
+    public void loadRecyclerView(String inputText) {
+        if (inputText.length() != 0) {
+            RealmResults<GifData> gifData = realm.where(GifData.class).contains("title", inputText).findAll();
             recyclerView.setAdapter(new MyRecyclerViewAdapter(MainActivity.this, gifData, true));
             recyclerView.setVisibility(android.view.View.VISIBLE);
         } else {
