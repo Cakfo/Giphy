@@ -6,5 +6,5 @@ package com.spaja.aat.main;
 
 public interface MainActivityView {
 
-    void loadRecyclerView(String inputText);
+    void loadRecyclerView(CharSequence inputText);
 }

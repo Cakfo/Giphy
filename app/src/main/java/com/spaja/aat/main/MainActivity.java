@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                presenter.getGifs(s.toString());
+                presenter.getGifs(s);
             }
 
             @Override
@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     @Override
-    public void loadRecyclerView(String inputText) {
+    public void loadRecyclerView(CharSequence inputText) {
         if (inputText.length() != 0) {
-            RealmResults<GifData> gifData = realm.where(GifData.class).contains("title", inputText).findAll();
+            RealmResults<GifData> gifData = realm.where(GifData.class).contains("title", String.valueOf(inputText)).findAll();
             recyclerView.setAdapter(new MyRecyclerViewAdapter(MainActivity.this, gifData, true));
             recyclerView.setVisibility(android.view.View.VISIBLE);
         } else {
