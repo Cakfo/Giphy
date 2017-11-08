@@ -24,7 +24,7 @@ class Presenter {
         this.repository = repository;
     }
 
-    void getGifs(CharSequence s) {
+    void getGifs(final CharSequence s) {
         view.loadRecyclerView(s);
         if (s.length() != 0) {
             GiphyAPI.service.getGifs(GiphyAPI.API_KEY, s.toString()).enqueue(new Callback<ApiResponse>() {

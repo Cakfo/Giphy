@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import io.realm.RealmObject;
 
 /**
- * Created by Spaja on 03-Nov-17.
+ * Created by Spaja on 08-Nov-17.
  */
 
-public class FixedWidth extends RealmObject {
+public class Original extends RealmObject {
 
     @SerializedName ("url")
     private String url;
@@ -98,3 +98,4 @@ public class FixedWidth extends RealmObject {
         this.webpSize = webpSize;
     }
 }
+

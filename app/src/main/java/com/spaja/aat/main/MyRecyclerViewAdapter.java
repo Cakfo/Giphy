@@ -8,9 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.spaja.aat.R;
 import com.spaja.aat.model.GifData;
+import com.spaja.aat.views.CustomTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,14 +50,17 @@ class MyRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, MyRecycler
         }
         holder.position.setText(String.valueOf(position));
 
+        Glide.with(context)
+                .load(gifData.getImages().getOriginalStill().getUrl())
+                .apply(new RequestOptions()
+                        .placeholder(R.mipmap.ic_placeholder))
+                .into(holder.gifPicture);
 
-        holder.gifTitle.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GifActivity.class);
-                if (gifData != null) {
-                    i.putExtra("url", gifData.getImages().getFixedWidth().getUrl());
-                }
+                i.putExtra("url", gifData.getImages().getOriginal().getUrl());
                 context.startActivity(i);
             }
         });
@@ -67,8 +74,9 @@ class MyRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, MyRecycler
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.gif_title) private TextView gifTitle;
-        @BindView(R.id.position) private TextView position;
+        @BindView (R.id.gif_title) CustomTextView gifTitle;
+        @BindView (R.id.position) CustomTextView position;
+        @BindView (R.id.gif_picture) ImageView gifPicture;
 
         MyViewHolder(android.view.View itemView) {
             super(itemView);
