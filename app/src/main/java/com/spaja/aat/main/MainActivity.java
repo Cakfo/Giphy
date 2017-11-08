@@ -64,10 +64,8 @@ public class MainActivity extends AppCompatActivity implements View {
     public void loadRecyclerView(CharSequence s) {
         if (s.length() != 0) {
             RealmResults<GifData> gifData = realm.where(GifData.class).contains("title", s.toString()).findAll();
-            if (gifData.size() != 0) {
-                recyclerView.setAdapter(new MyRecyclerViewAdapter(MainActivity.this, gifData, true));
-                recyclerView.setVisibility(android.view.View.VISIBLE);
-            }
+            recyclerView.setAdapter(new MyRecyclerViewAdapter(MainActivity.this, gifData, true));
+            recyclerView.setVisibility(android.view.View.VISIBLE);
         } else {
             recyclerView.setVisibility(android.view.View.GONE);
         }
