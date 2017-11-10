@@ -21,7 +21,7 @@ public class RepositoryImpl implements Repository {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                realm.copyToRealmOrUpdate(gifData);
+                realm.insertOrUpdate(gifData);
             }
         });
     }
