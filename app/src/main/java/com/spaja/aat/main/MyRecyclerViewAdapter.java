@@ -53,7 +53,7 @@ class MyRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, MyRecycler
         holder.position.setText(String.valueOf(position));
 
         Glide.with(context)
-                .load(gifData.getImages().getOriginalStill().getUrl())
+                .load(gifData.getImages().getFixedWidthStill().getUrl())
                 .apply(new RequestOptions()
                         .placeholder(R.mipmap.ic_placeholder))
                 .into(holder.gifPicture);
@@ -62,7 +62,7 @@ class MyRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, MyRecycler
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GifActivity.class);
-                i.putExtra("url", gifData.getImages().getOriginal().getUrl());
+                i.putExtra("url", gifData.getImages().getFixedWidth().getUrl());
                 context.startActivity(i);
             }
         });

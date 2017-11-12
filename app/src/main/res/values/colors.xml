@@ -6,6 +6,5 @@
     <color name="colorPrimaryLight">#B2DFDB</color>
     <color name="colorText">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
-    <color name="grayLight">#d9d7d7</color>
-
+    <color name="grayLight">#f6f6f6</color>
 </resources>
