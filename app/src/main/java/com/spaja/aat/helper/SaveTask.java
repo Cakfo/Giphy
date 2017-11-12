@@ -3,6 +3,7 @@ package com.spaja.aat.helper;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
@@ -39,6 +40,9 @@ public class SaveTask extends AsyncTask<String, Void, File> {
         if (gif != null) {
             Uri uri = Uri.parse(gif.toString());
             SaveHelper.saveGifToGallery(context, uri);
+            Toast.makeText(context, "Gif saved to Gallery", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
         }
     }
 }

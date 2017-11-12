@@ -19,7 +19,7 @@ import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity implements MainActivityView {
 
-    @BindView (R.id.recycler) public RecyclerView recyclerView;
+    @BindView (R.id.recycler) public RecyclerView gifsRecyclerView;
     private Realm realm;
     private MainActivityPresenter presenter;
 
@@ -57,17 +57,17 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
 
     private void setupRecyclerView() {
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(manager);
+        gifsRecyclerView.setLayoutManager(manager);
     }
 
     @Override
     public void loadRecyclerView(CharSequence inputText) {
         if (inputText.length() != 0) {
             RealmResults<GifData> gifData = realm.where(GifData.class).contains("title", inputText.toString()).findAll();
-            recyclerView.setAdapter(new MyRecyclerViewAdapter(MainActivity.this, gifData, true));
-            recyclerView.setVisibility(android.view.View.VISIBLE);
+            gifsRecyclerView.setAdapter(new GifsRecyclerViewAdapter(MainActivity.this, gifData, true));
+            gifsRecyclerView.setVisibility(android.view.View.VISIBLE);
         } else {
-            recyclerView.setVisibility(android.view.View.GONE);
+            gifsRecyclerView.setVisibility(android.view.View.GONE);
         }
     }
 }

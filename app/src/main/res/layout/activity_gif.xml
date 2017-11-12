@@ -1,31 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.spaja.aat.main.GifActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.spaja.aat.gifactivity.GifActivity">
 
-    <ProgressBar
-        android:indeterminateTint="@color/colorPrimary"
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        />
-
-    <ImageView
-        android:layout_centerInParent="true"
-        android:id="@+id/gif"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:text="@string/save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/save_image"
-        android:layout_below="@+id/gif"/>
+        android:background="@color/colorPrimaryLight">
 
-</RelativeLayout>
+        <TextView
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/colorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gif_title"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/gif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/colorPrimary"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:background="@color/colorPrimaryLight"
+        android:gravity="end">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp">
+
+            <LinearLayout
+                android:id="@+id/save_gif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white">
+
+                </FrameLayout>
+
+                <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:alpha="0.7"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_download_icon"
+                    android:tint="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:text="Save"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/share_gif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white">
+
+                </FrameLayout>
+
+                <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:alpha="0.7"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_menu_share"
+                    android:tint="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:text="Share"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

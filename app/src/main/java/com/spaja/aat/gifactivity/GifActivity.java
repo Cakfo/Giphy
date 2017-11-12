@@ -1,4 +1,4 @@
-package com.spaja.aat.main;
+package com.spaja.aat.gifactivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -9,9 +9,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -25,11 +26,15 @@ import com.spaja.aat.helper.SaveTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GifActivity extends AppCompatActivity {
+public class GifActivity extends AppCompatActivity implements GifActivityView {
 
     @BindView (R.id.gif) ImageView imageView;
-    @BindView (R.id.progress_bar) ProgressBar progressBar;
-    @BindView (R.id.save_image) Button save;
+    @BindView (R.id.save_gif) LinearLayout saveGif;
+    @BindView (R.id.share_gif) LinearLayout shareGif;
+    @BindView (R.id.gif_title) TextView gifTitle;
+    private GifActivityPresenter presenter;
+    private String url;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +43,27 @@ public class GifActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        final String url = getIntent().getStringExtra("url");
+        url = getIntent().getStringExtra("url");
+        title = getIntent().getStringExtra("title");
+        presenter = new GifActivityPresenter(this);
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                downloadGif(url);
-            }
-        });
+        gifTitle.setText(title);
 
         displayGif(url);
 
+        saveGif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveGif(url);
+            }
+        });
+
+        shareGif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(GifActivity.this, "Coming soon :)", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void displayGif(String url) {
@@ -72,7 +87,8 @@ public class GifActivity extends AppCompatActivity {
         }
     }
 
-    private void downloadGif(String url) {
+
+    void saveGif(String url) {
 
         int permissionCheck = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -82,9 +98,10 @@ public class GifActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     99);
-
         } else {
-            new SaveTask(GifActivity.this.getApplicationContext()).execute(url);
+            if (url != null) {
+                new SaveTask(this).execute(url);
+            }
         }
     }
 
@@ -94,7 +111,7 @@ public class GifActivity extends AppCompatActivity {
 
         if (requestCode == 99 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            save.performClick();
+            saveGif.performClick();
         } else {
             ActivityCompat.requestPermissions(GifActivity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},

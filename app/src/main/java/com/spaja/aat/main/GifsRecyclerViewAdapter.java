@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.spaja.aat.R;
+import com.spaja.aat.gifactivity.GifActivity;
 import com.spaja.aat.model.GifData;
 import com.spaja.aat.views.CustomTextView;
 
@@ -26,11 +26,11 @@ import io.realm.RealmResults;
  * Created by Spaja on 03-Nov-17.
  */
 
-class MyRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, MyRecyclerViewAdapter.MyViewHolder> {
+class GifsRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, GifsRecyclerViewAdapter.MyViewHolder> {
 
     private RealmResults<GifData> mDataSet;
 
-    MyRecyclerViewAdapter(@NonNull Context context, @Nullable RealmResults<GifData> data, boolean autoUpdate) {
+    GifsRecyclerViewAdapter(@NonNull Context context, @Nullable RealmResults<GifData> data, boolean autoUpdate) {
         super(context, data, autoUpdate);
         this.mDataSet = data;
     }
@@ -46,23 +46,24 @@ class MyRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, MyRecycler
 
         final GifData gifData = mDataSet.get(position);
 
+        holder.position.setText(String.valueOf(position));
         if (gifData != null) {
             holder.gifTitle.setText(gifData.getTitle());
+            Glide.with(context)
+                    .load(gifData.getImages().getFixedWidthStill().getUrl())
+                    .apply(new RequestOptions()
+                            .placeholder(R.mipmap.ic_placeholder))
+                    .into(holder.gifPicture);
         }
 
-        holder.position.setText(String.valueOf(position));
 
-        Glide.with(context)
-                .load(gifData.getImages().getFixedWidthStill().getUrl())
-                .apply(new RequestOptions()
-                        .placeholder(R.mipmap.ic_placeholder))
-                .into(holder.gifPicture);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GifActivity.class);
                 i.putExtra("url", gifData.getImages().getFixedWidth().getUrl());
+                i.putExtra("title", gifData.getTitle());
                 context.startActivity(i);
             }
         });
