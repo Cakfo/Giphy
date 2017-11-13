@@ -6,6 +6,9 @@ import io.realm.RealmObject;
 
 public class Images extends RealmObject {
 
+    @SerializedName("fixed_height")
+    private FixedHeight fixedHeight;
+
     @SerializedName ("fixed_width")
     private FixedWidth fixedWidth;
 
@@ -17,6 +20,14 @@ public class Images extends RealmObject {
 
     @SerializedName ("original_still")
     private OriginalStill originalStill;
+
+    public FixedHeight getFixedHeight() {
+        return fixedHeight;
+    }
+
+    public void setFixedHeight(FixedHeight fixedHeight) {
+        this.fixedHeight = fixedHeight;
+    }
 
     public FixedWidthStill getFixedWidthStill() {
         return fixedWidthStill;

@@ -8,7 +8,7 @@ import io.realm.Realm;
  * Created by Spaja on 03-Nov-17.
  */
 
-public class Controller extends Application {
+public class App extends Application {
 
     @Override
     public void onCreate() {

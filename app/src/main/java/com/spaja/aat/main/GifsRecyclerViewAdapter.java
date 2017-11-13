@@ -62,7 +62,7 @@ class GifsRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, GifsRecy
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GifActivity.class);
-                i.putExtra("url", gifData.getImages().getFixedWidth().getUrl());
+                i.putExtra("url", gifData.getImages().getFixedHeight().getUrl());
                 i.putExtra("title", gifData.getTitle());
                 context.startActivity(i);
             }
