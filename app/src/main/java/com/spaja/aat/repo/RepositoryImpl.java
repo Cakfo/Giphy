@@ -17,7 +17,7 @@ public class RepositoryImpl implements Repository {
         realm = Realm.getDefaultInstance();
     }
 
-    public void saveOrUpdateToDB(final RealmList<GifData> gifData) {
+    public void saveToDB(final RealmList<GifData> gifData) {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

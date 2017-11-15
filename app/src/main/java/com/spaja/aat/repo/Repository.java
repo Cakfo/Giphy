@@ -10,6 +10,6 @@ import io.realm.RealmList;
 
 public interface Repository {
 
-    void saveOrUpdateToDB(RealmList<GifData> gifData);
+    void saveToDB(RealmList<GifData> gifData);
 
 }

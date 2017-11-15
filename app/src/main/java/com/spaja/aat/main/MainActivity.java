@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.spaja.aat.R;
 import com.spaja.aat.model.GifData;
@@ -69,5 +70,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
         } else {
             gifsRecyclerView.setVisibility(android.view.View.GONE);
         }
+    }
+
+    @Override
+    public void showErrorToast() {
+        Toast.makeText(this, "YOU SHALL NOT PASS!!!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.clearResources();
     }
 }

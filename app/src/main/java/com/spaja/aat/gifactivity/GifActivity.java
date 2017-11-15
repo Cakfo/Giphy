@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -61,7 +60,8 @@ public class GifActivity extends AppCompatActivity implements GifActivityView {
         shareGif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(GifActivity.this, "Coming soon :)", Toast.LENGTH_SHORT).show();
+                new SaveTask(GifActivity.this, true).execute(url);
+
             }
         });
     }
@@ -100,7 +100,7 @@ public class GifActivity extends AppCompatActivity implements GifActivityView {
                     99);
         } else {
             if (url != null) {
-                new SaveTask(this).execute(url);
+                new SaveTask(this, false).execute(url);
             }
         }
     }

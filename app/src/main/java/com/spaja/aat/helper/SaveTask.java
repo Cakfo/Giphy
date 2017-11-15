@@ -18,9 +18,11 @@ import java.util.concurrent.ExecutionException;
 public class SaveTask extends AsyncTask<String, Void, File> {
 
     private final Context context;
+    private boolean cache;
 
-    public SaveTask(Context context) {
+    public SaveTask(Context context, boolean cache) {
         this.context = context;
+        this.cache = cache;
     }
 
     @Override
@@ -39,8 +41,12 @@ public class SaveTask extends AsyncTask<String, Void, File> {
     protected void onPostExecute(File gif) {
         if (gif != null) {
             Uri uri = Uri.parse(gif.toString());
-            SaveHelper.saveGifToGallery(context, uri);
-            Toast.makeText(context, "Gif saved to Gallery", Toast.LENGTH_SHORT).show();
+            if (!cache) {
+                SaveAndShareHelper.saveGifToGallery(context, uri);
+                Toast.makeText(context, "Gif saved to Gallery", Toast.LENGTH_SHORT).show();
+            } else {
+                SaveAndShareHelper.shareGif(context, gif);
+            }
         } else {
             Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
         }

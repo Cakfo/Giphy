@@ -7,4 +7,5 @@ package com.spaja.aat.main;
 public interface MainActivityView {
 
     void loadRecyclerView(CharSequence inputText);
+    void showErrorToast();
 }

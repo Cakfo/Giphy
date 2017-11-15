@@ -56,8 +56,6 @@ class GifsRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, GifsRecy
                     .into(holder.gifPicture);
         }
 
-
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +65,6 @@ class GifsRecyclerViewAdapter extends RealmRecyclerViewAdapter<GifData, GifsRecy
                 context.startActivity(i);
             }
         });
-
     }
 
     @Override
