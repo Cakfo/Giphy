@@ -1,4 +1,4 @@
-package com.spaja.aat.main;
+package com.spaja.aat.mainactivity;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.spaja.aat.main;
+package com.spaja.aat.mainactivity;
 
 /**
  * Created by Spaja on 26-Oct-17.

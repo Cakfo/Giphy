@@ -23,7 +23,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".mainactivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

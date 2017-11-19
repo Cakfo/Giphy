@@ -1,4 +1,4 @@
-package com.spaja.aat.main;
+package com.spaja.aat.mainactivity;
 
 import com.spaja.aat.model.ApiResponse;
 import com.spaja.aat.networking.GiphyAPI;
@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -28,15 +29,15 @@ class MainActivityPresenter {
         disposable = new CompositeDisposable();
     }
 
-    void getGifs(final CharSequence inputText) {
+    void getGifs(final String inputText) {
 
         view.loadRecyclerView(inputText);
         if (inputText.length() != 0) {
 
-            Observable<ApiResponse> gifsObservable = GiphyAPI.service.getGifsReact(GiphyAPI.API_KEY, inputText.toString())
-                    .debounce(500, TimeUnit.MILLISECONDS)
+            Observable<ApiResponse> gifsObservable = GiphyAPI.service.getGifsReact(GiphyAPI.API_KEY, inputText)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io());
+
             DisposableObserver<ApiResponse> observer = new DisposableObserver<ApiResponse>() {
                 @Override
                 public void onNext(ApiResponse response) {
