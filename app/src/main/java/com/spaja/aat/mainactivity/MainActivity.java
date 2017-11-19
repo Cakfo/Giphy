@@ -27,6 +27,7 @@ import io.realm.RealmResults;
 public class MainActivity extends AppCompatActivity implements MainActivityView {
 
     @BindView (R.id.recycler) public RecyclerView gifsRecyclerView;
+    @BindView (R.id.search) EditText editText;
     private DisposableObserver<String> observer;
     private Realm realm;
     private MainActivityPresenter presenter;
@@ -43,9 +44,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
         setupRecyclerView();
 
         presenter = new MainActivityPresenter(this, new RepositoryImpl());
-
-        EditText editText = (EditText) findViewById(R.id.search);
-
+        
         setupSearchView(editText);
     }
 
