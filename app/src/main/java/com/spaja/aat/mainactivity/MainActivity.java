@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
         presenter = new MainActivityPresenter(this, new RepositoryImpl());
         
         setupSearchView(editText);
+
     }
 
     private void setupSearchView(EditText editText) {

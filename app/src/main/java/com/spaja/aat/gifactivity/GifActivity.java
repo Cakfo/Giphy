@@ -2,6 +2,7 @@ package com.spaja.aat.gifactivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -20,10 +22,17 @@ import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.spaja.aat.R;
+import com.spaja.aat.helper.SaveAndShareHelper;
 import com.spaja.aat.helper.SaveTask;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class GifActivity extends AppCompatActivity implements GifActivityView {
 
@@ -100,7 +109,27 @@ public class GifActivity extends AppCompatActivity implements GifActivityView {
                     99);
         } else {
             if (url != null) {
-                new SaveTask(this, false).execute(url);
+//                new SaveTask(this, false).execute(url);
+                Single<File> fileSingle = SaveAndShareHelper.downloadImage(GifActivity.this, url);
+
+                fileSingle.subscribe(new SingleObserver<File>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        int i = 0;
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        Uri uri = Uri.parse(file.toString());
+                        SaveAndShareHelper.saveGifToGallery(GifActivity.this, uri);
+                        Toast.makeText(GifActivity.this, "Gif saved to gallery.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        int i = 0;
+                    }
+                });
             }
         }
     }
